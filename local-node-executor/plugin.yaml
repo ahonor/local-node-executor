@@ -1,0 +1,21 @@
+name: local node executor
+rundeckPluginVersion: 1.0
+author: Alex Honor
+date: 08/14/2015
+version: 1.0
+providers:
+    - name: local-exec
+      service: NodeExecutor
+      title: local-exec
+      description: Executes the command on the rundeck node.
+      plugin-type: script
+      script-interpreter: /bin/bash
+      script-file: exec.sh
+      script-args: ${node.username} ${node.hostname} ${exec.command}
+      config:
+        - name: envfile
+          title: File containing environment variables
+          type: String
+          required: false
+          description: "Optional file for storing environment variables"
+          scope: Instance
