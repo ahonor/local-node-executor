@@ -30,6 +30,16 @@ fi
 
 #finally, execute the command
 
-echo "$(date): $@" >> /tmp/exec.log
-exec "$@"
+# Becarful with this line, just use it for debug.
+#echo "$(date): $@" >> /tmp/exec.log
+
+# This is to run each command on isolate directory.
+# Following https://github.com/rundeck/rundeck/issues/1767#issuecomment-450912721
+WORKDIR="/tmp/rundeck/$RD_JOB_EXECID"
+mkdir -p "$WORKDIR"
+cd "$WORKDIR"
+eval "$@"
+RC=$?
+rm -rf "$WORKDIR"
+exit $RC
 
