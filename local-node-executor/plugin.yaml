@@ -9,7 +9,6 @@ providers:
       title: local-exec
       description: Executes the command on the rundeck node.
       plugin-type: script
-      script-interpreter: /bin/bash
       script-file: exec.sh
       script-args: ${node.username} ${node.hostname} ${exec.command}
       config:
